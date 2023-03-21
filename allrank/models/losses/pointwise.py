@@ -21,7 +21,13 @@ def pointwise_rmse(y_pred, y_true, no_of_levels, padded_value_indicator=PADDED_Y
     y_true[mask] = 0
     y_pred[mask] = 0
 
+    y_pred = y_pred[:, :, 0]
+
+    print(y_true.shape)
+    print(y_pred.shape)
+    print((no_of_levels * y_pred).shape)
     errors = (y_true - no_of_levels * y_pred)
+    print(errors.shape)
 
     squared_errors = errors ** 2
 

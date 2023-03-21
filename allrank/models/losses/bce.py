@@ -18,6 +18,9 @@ def bce(y_pred, y_true, padded_value_indicator=PADDED_Y_VALUE):
     y_pred = y_pred.clone()
     y_true = y_true.clone()
 
+    print(y_pred.shape)
+    print(y_true.shape)
+
     mask = y_true == padded_value_indicator
     valid_mask = y_true != padded_value_indicator
 

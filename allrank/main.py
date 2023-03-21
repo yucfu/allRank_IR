@@ -27,6 +27,8 @@ def parse_args() -> Namespace:
     parser.add_argument("--run-id", help="Name of this run to be recorded (must be unique within output dir)",
                         required=True)
     parser.add_argument("--config-file-name", required=True, type=str, help="Name of json file with config")
+    # Added by Yuchuan on 21/03/2023.
+    parser.add_argument("--output_dir", required=True, type=str, help="Output directory for the model.")
 
     return parser.parse_args()
 
@@ -35,12 +37,14 @@ def run():
     # reproducibility
     torch.manual_seed(42)
     torch.cuda.manual_seed_all(42)
+    torch.set_num_threads(1)
     np.random.seed(42)
 
     args = parse_args()
 
     paths = PathsContainer.from_args(args.job_dir, args.run_id, args.config_file_name)
 
+    paths.output_dir = args.output_dir
     create_output_dirs(paths.output_dir)
 
     logger = init_logger(paths.output_dir)

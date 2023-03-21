@@ -29,7 +29,7 @@ def parse_args() -> Namespace:
 args = parse_args()
 
 x_train, y_train, query_ids_train = load_svmlight_file(os.path.join(args.ds_path, "train.txt"), query_id=True)
-x_test, y_test, query_ids_test = load_svmlight_file(os.path.join(args.ds_path, "test.txt"), query_id=True)
+x_test, y_test, query_ids_test = load_svmlight_file(os.path.join(args.ds_path, "vali.txt"), query_id=True)
 x_vali, y_vali, query_ids_vali = load_svmlight_file(os.path.join(args.ds_path, "vali.txt"), query_id=True)
 
 x_train_transposed = x_train.toarray().T
@@ -78,7 +78,7 @@ train_normalized_path = os.path.join(ds_normalized_path, "train.txt")
 with open(train_normalized_path, "w"):
     dump_svmlight_file(x_train_normalized.T, y_train, train_normalized_path, query_id=query_ids_train)
 
-test_normalized_path = os.path.join(ds_normalized_path, "test.txt")
+test_normalized_path = os.path.join(ds_normalized_path, "vali.txt")
 with open(test_normalized_path, "w"):
     dump_svmlight_file(x_test_normalized.T, y_test, test_normalized_path, query_id=query_ids_test)
 

@@ -8,3 +8,17 @@ flake8-debugger==1.4.0
 flake8-print==2.0.2
 flake8-tuple==0.2.13
 mypy==0.790
+
+# requirements in setup.py
+torch>=1.6.0, <=1.8.0
+torchvision>=0.7.0, <= 0.9.0
+scikit-learn>=0.23.0
+pandas>=1.0.5
+numpy>=1.18.5
+scipy>=1.4.1
+attrs>=19.3.0
+flatten_dict>=0.3.0
+tensorboardX>=2.1.0
+gcsfs==0.6.2
+google-auth==1.27.1
+allrank
