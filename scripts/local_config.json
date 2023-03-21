@@ -21,7 +21,7 @@
     }
   },
   "data": {
-    "path": "dummy_data",
+    "path": "new_dataset/MQ2008/Fold1",
     "validation_ds_role": "vali",
     "num_workers": 1,
     "batch_size": 64,
