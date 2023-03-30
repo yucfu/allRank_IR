@@ -29,12 +29,23 @@ def ndcg(y_pred, y_true, ats=None, gain_function=lambda x: torch.pow(2, x) - 1, 
 
 
 def __apply_mask_and_get_true_sorted_by_preds(y_pred, y_true, padding_indicator=PADDED_Y_VALUE):
+    # Sort the predicted scores in descending order along the last dimension.
+    # Return the ground truth relevance scores sorted in the same order as the predicted scores.
     mask = y_true == padding_indicator
 
     y_pred[mask] = float('-inf')
     y_true[mask] = 0.0
+    print('y_pred: ', y_pred[0])
+    print('y_true: ', y_true[0])
 
-    _, indices = y_pred.sort(descending=True, dim=-1)
+    prob, indices = y_pred.sort(descending=True, dim=-1)
+
+    print('y_pred_sorted: ', prob[0])
+    print('y_pred_sorted: ', indices[0])
+
+    print(torch.gather(y_true, dim=1, index=indices)[0])
+
+    # gather elements from a specified dimension of a tensor based on the indices provided in another tensor.
     return torch.gather(y_true, dim=1, index=indices)
 
 
@@ -60,14 +71,19 @@ def dcg(y_pred, y_true, ats=None, gain_function=lambda x: torch.pow(2, x) - 1, p
     ats = [min(at, actual_length) for at in ats]
 
     true_sorted_by_preds = __apply_mask_and_get_true_sorted_by_preds(y_pred, y_true, padding_indicator)
+    # print(true_sorted_by_preds)
+    # print(true_sorted_by_preds.shape) # [64, 119]
+    # print(true_sorted_by_preds[0])
 
     discounts = (torch.tensor(1) / torch.log2(torch.arange(true_sorted_by_preds.shape[1], dtype=torch.float) + 2.0)).to(
         device=true_sorted_by_preds.device)
 
+    # Compute the gain for true relevance scores ordered by predicted scores in descending order
     gains = gain_function(true_sorted_by_preds)
 
     discounted_gains = (gains * discounts)[:, :np.max(ats)]
 
+    # Computes the cumulative sum of a tensor along a specified dimension.
     cum_dcg = torch.cumsum(discounted_gains, dim=1)
 
     ats_tensor = torch.tensor(ats, dtype=torch.long) - torch.tensor(1)

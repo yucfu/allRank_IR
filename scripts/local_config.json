@@ -17,7 +17,7 @@
     },
     "post_model": {
       "output_activation": "Sigmoid",
-      "d_output": 4
+      "d_output": 1
     }
   },
   "data": {
@@ -50,9 +50,9 @@
     "ndcg_5"
   ],
   "loss": {
-    "name": "ordinal",
+    "name": "rankNet",
     "args": {
-      "n": 4
+
     }
   },
   "expected_metrics" : {
