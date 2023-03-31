@@ -9,11 +9,11 @@
       "dropout": 0.0
     },
     "transformer": {
-      "N": 1,
-      "d_ff": 64,
-      "h": 1,
+      "N": 4,
+      "d_ff": 512,
+      "h": 2,
       "positional_encoding": null,
-      "dropout": 0.0
+      "dropout": 0.4
     },
     "post_model": {
       "output_activation": "Sigmoid",
@@ -47,7 +47,7 @@
   },
   "val_metric": "ndcg_5",
   "metrics": [
-    "ndcg_5"
+    "ndcg_5", "ndcg_10", "ndcg_20", "mrr_5", "mrr_10"
   ],
   "loss": {
     "name": "rankNet",

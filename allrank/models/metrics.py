@@ -35,15 +35,15 @@ def __apply_mask_and_get_true_sorted_by_preds(y_pred, y_true, padding_indicator=
 
     y_pred[mask] = float('-inf')
     y_true[mask] = 0.0
-    print('y_pred: ', y_pred[0])
-    print('y_true: ', y_true[0])
+    # print('y_pred: ', y_pred[0])
+    # print('y_true: ', y_true[0])
 
     prob, indices = y_pred.sort(descending=True, dim=-1)
 
-    print('y_pred_sorted: ', prob[0])
-    print('y_pred_sorted: ', indices[0])
+    # print('y_pred_sorted: ', prob[0])
+    # print('y_pred_sorted: ', indices[0])
 
-    print(torch.gather(y_true, dim=1, index=indices)[0])
+    # print(torch.gather(y_true, dim=1, index=indices)[0])
 
     # gather elements from a specified dimension of a tensor based on the indices provided in another tensor.
     return torch.gather(y_true, dim=1, index=indices)

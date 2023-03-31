@@ -47,7 +47,7 @@ def run():
         model = make_model(n_features=n_features, **asdict(config.model, recurse=False))
     else:
         model = make_model(config.model.fc_model, None, config.model.post_model, n_features)
-
+    model.to(device)
     state_dict = torch.load(os.path.join(args.output_dir, "model.pkl"))
     model.load_state_dict(state_dict)
     model.eval()

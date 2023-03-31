@@ -81,14 +81,14 @@ def run():
     # xb: [64, 240, 46]
     # yb: [64, 240]
     # indices: [64, 240]
-    print('tmp: ', tmp[0][0].shape, tmp[0][1].shape, tmp[0][2].shape)
+    # print('tmp: ', tmp[0][0].shape, tmp[0][1].shape, tmp[0][2].shape)
 
     # gpu support
     dev = get_torch_device()
     logger.info("Model training will execute on {}".format(dev.type))
 
     # instantiate model
-    print(args.use_transformer)
+    # print(args.use_transformer)
     if args.use_transformer == '1':
         print('-'*100)
         model = make_model(n_features=n_features, **asdict(config.model, recurse=False))
