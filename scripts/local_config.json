@@ -36,12 +36,12 @@
   "lr_scheduler": {
     "name": "StepLR",
     "args": {
-      "step_size": 3,
+      "step_size": 10,
       "gamma": 0.5
     }
   },
   "training": {
-    "epochs": 10,
+    "epochs": 50,
     "early_stopping_patience": 100,
     "gradient_clipping_norm": null
   },
@@ -50,9 +50,8 @@
     "ndcg_5", "ndcg_10", "ndcg_20", "mrr_5", "mrr_10"
   ],
   "loss": {
-    "name": "rankNet",
+    "name": "approxNDCGLoss",
     "args": {
-
     }
   },
   "expected_metrics" : {

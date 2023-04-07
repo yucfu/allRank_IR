@@ -33,7 +33,7 @@ def run():
     config = Config.from_json(args.config_file_name)
     test_ds = load_libsvm_dataset_role(
         role="test",
-        input_path=config.data.path,
+        input_path=args.data_dir,
         slate_length=config.data.slate_length
     )
 
